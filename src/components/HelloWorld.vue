@@ -2,9 +2,6 @@
   <div class="hello">
    
   </div>
-  <div>
-    thisismytp
-  </div>
 </template>
 
 <script>
