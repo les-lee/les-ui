@@ -12,7 +12,7 @@
     "vue": "^3.0.0"
   },
   "devDependencies": {
-    "stylus": "^0.54.8",
+    "@vue/babel-plugin-jsx": "^1.0.0",
     "@vue/cli-plugin-babel": "~4.5.0",
     "@vue/cli-plugin-eslint": "~4.5.0",
     "@vue/cli-service": "~4.5.0",
@@ -21,6 +21,7 @@
     "babel-plugin-component": "^1.1.1",
     "eslint": "^6.7.2",
     "eslint-plugin-vue": "^7.0.0-0",
+    "stylus": "^0.54.8",
     "stylus-loader": "^4.3.1"
   },
   "eslintConfig": {

@@ -12,14 +12,20 @@
         height: `${scrollHeight}px`,
       }"
     >
-      <v-list-item
+      <div
+        class="v-list-item"
         v-for="(item, index) in renderList"
         :key="index"
-        :itemData="item"
+        @click="onListItemClick($event, item, refStartIndex + index)"
         :style="{
-          transform: `translateY(${refStartIndex * itemHeight}px)`
+          height: `${itemHeight}px`,
+          transform: `translateY(${refStartIndex * itemHeight}px)`,
         }"
-      ></v-list-item>
+      >
+        <slot :listItem="item" :index="refStartIndex + index">
+          <v-list-item :itemData="item"></v-list-item>
+        </slot>
+      </div>
     </div>
   </div>
 </template>
@@ -46,6 +52,10 @@ export default {
     startIndex: {
       type: Number,
       default: 0,
+    },
+    debounceTimeout: {
+      type: Number,
+      default: 40,
     },
   },
   watch: {
@@ -74,8 +84,10 @@ export default {
           0
         );
         this.refStartIndex = refStartIndex;
-        console.log(this.refStartIndex, this.displayCount);
-      }, 50);
+      }, this.debounceTimeout);
+    },
+    onListItemClick(event, data, index) {
+      this.$emit("onItemClick", { event, data, index });
     },
   },
   computed: {
@@ -101,5 +113,17 @@ export default {
 <style scope>
 .vlist-scroll-container {
   overflow: auto;
+}
+
+.v-list-item {
+  display: flex;
+  align-items: center;
+  padding: 5px;
+}
+.v-list-item:not(:last-child) {
+  /* border-bottom: 1px solid #cfcfcf; */
+}
+.v-list-item:hover {
+  background: #efefef;
 }
 </style>

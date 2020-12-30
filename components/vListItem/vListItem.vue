@@ -1,10 +1,8 @@
 <template>
-  <div class="v-list-item">
-    <div class="v-list-item-left">{{ itemData.id || Date.now() }}</div>
-    <div class="v-list-item-right">
-      <div>{{ itemData.title || "title" }}</div>
-      <div>{{ itemData.name || "name" }}</div>
-    </div>
+  <div class="v-list-item-left">{{ itemData.id || Date.now() }}</div>
+  <div class="v-list-item-right">
+    <div>{{ itemData.title || "title" }}</div>
+    <div>{{ itemData.name || "name" }}</div>
   </div>
 </template>
 
@@ -16,10 +14,6 @@ export default {
 </script>
 
 <style scope>
-.v-list-item {
-  display: flex;
-  align-items: center;
-}
 
 .v-list-item-left {
   width: 30%;

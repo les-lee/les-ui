@@ -1,17 +1,27 @@
 <template>
-  <v-list :item-height="itemHeight" :max-height="maxHeight" :list-data="data">
-    <!-- <v-list-item></v-list-item> -->
+  <v-list
+    :item-height="itemHeight"
+    :max-height="maxHeight"
+    :list-data="data"
+    :debounceTimeout="40"
+    @onItemClick="onItemClick"
+  >
+    <template v-slot="{ listItem, index }">
+      <div class="v-list-item">{{ listItem.name + index }}</div>
+    </template>
   </v-list>
 </template>
 
-<script>
-
+<script lang="ts">
+import {ListItem} from '../types/index'
 export default {
   name: "App",
-  components: {
+  components: {},
+  setup() {
+
   },
   data() {
-    let data = [];
+    let data:Array<string> = [];
     const nameList = [
       "小明",
       "小红",
@@ -45,16 +55,17 @@ export default {
       data,
     };
   },
+  methods: {
+    onItemClick(payload) {
+      console.log(payload, "负载");
+    },
+  },
 };
 </script>
 
 <style>
-#app {
-  font-family: Avenir, Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-  text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+body {
+  padding: 0;
+  margin: 0;
 }
 </style>
