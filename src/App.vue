@@ -1,71 +1,38 @@
 <template>
-  <v-list
-    :item-height="itemHeight"
-    :max-height="maxHeight"
-    :list-data="data"
-    :debounceTimeout="40"
-    @onItemClick="onItemClick"
-  >
-    <template v-slot="{ listItem, index }">
-      <div class="v-list-item">{{ listItem.name + index }}</div>
-    </template>
-  </v-list>
+  <v-list :max-height="550" :item-height="65" :list-data="listData"></v-list>
+  <v-button></v-button>
+  <div class="test-stylus">red</div>
 </template>
 
 <script lang="ts">
-import {ListItem} from '../types/index'
-export default {
-  name: "App",
-  components: {},
-  setup() {
+import { Options, Vue } from "vue-class-component";
 
-  },
-  data() {
-    let data:Array<string> = [];
-    const nameList = [
-      "小明",
-      "小红",
-      "小琼",
-      "小雪",
-      "小肥",
-      "小钰",
-      "小球",
-      "小样",
-    ];
-    const titleList = [
-      "开发经理",
-      "产品经理",
-      "前端开发",
-      "后台开发",
-      "算法岗位",
-      "人工智能",
-      "linux运维",
-      "测试开发",
-    ];
-    for (let index = 0; index < 100000; index++) {
-      data.push({
+interface ListItem {
+  id: string | number;
+  name: string;
+  title: string;
+}
+
+@Options({
+  components: {},
+})
+export default class App extends Vue {
+  listData: Array<ListItem> = [];
+  created() {
+    const nameList: Array<string> = ["小红", "小明", "小白"];
+    const titleList: Array<string> = ["前端开发", "后台开发", "产品经理"];
+    for (let index = 0; index < 10000; index++) {
+      this.listData.push({
         id: index,
-        title: titleList[index % 8],
-        name: nameList[index % 8],
+        name: nameList[index % 3],
+        title: titleList[index % 3],
       });
     }
-    return {
-      itemHeight: 65,
-      maxHeight: 550,
-      data,
-    };
-  },
-  methods: {
-    onItemClick(payload) {
-      console.log(payload, "负载");
-    },
-  },
-};
+  }
+}
 </script>
 
-<style>
-body {
-  padding: 0;
-  margin: 0;
-}
+<style lang="stylus">
+.test-stylus
+  color red
 </style>
